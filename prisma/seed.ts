@@ -14,7 +14,8 @@ const main = async () => {
         description:
           "Escolha um presentinho com carinho e faça parte desse momento tão especial.",
         avatarImageUrl: "https://i.imgur.com/SYktTvs.png",
-        coverImageUrl: "",
+        coverImageUrl:
+          "https://fv5-2.files.fm/thumb_show.php?i=vxvvsrfnjx&view&v=1&PHPSESSID=1c126b51b595294d48ad4687eb8f66ce003d7bd7",
       },
     });
     const babyCategory = await tx.menuCategory.create({
