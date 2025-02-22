@@ -1,5 +1,6 @@
 import { db } from "@/lib/prima";
 import BabyShowerHeader from "./components/header";
+import BabyShowerCategories from "./components/categories";
 
 interface BabyShowerMenuProps {
   params: Promise<{ slug: string }>;
@@ -11,13 +12,23 @@ const BabyShowerMenu = async ({ params }: BabyShowerMenuProps) => {
     where: {
       slug,
     },
+    include: {
+      menuCategories: {
+        include: {
+          products: true,
+        },
+      },
+    },
   });
+
   if (!babyShower) {
     return <div>Not found</div>;
   }
+
   return (
     <div>
       <BabyShowerHeader babyShower={babyShower} />
+      <BabyShowerCategories babyShower={babyShower} />
     </div>
   );
 };
