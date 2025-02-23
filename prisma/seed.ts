@@ -106,6 +106,47 @@ const main = async () => {
           menuCategoryId: hygieneCategory.id,
           babyId: babyShower.id,
         },
+        {
+          name: "Granado Sab Liquido Bebe Tradicional 500Ml",
+          description:
+            "Sab liquido bebe tradicional 500ml. Formulado com glicerina vegetal e ph da pele, o sabonete limpa com suavidade a pele do bebê, deixando-a macia e perfumada.",
+          price: 35.9,
+          imageUrl:
+            "https://m.media-amazon.com/images/I/51dUPoy9NBL._AC_SL1000_.jpg",
+          menuCategoryId: hygieneCategory.id,
+          babyId: babyShower.id,
+        },
+      ],
+    });
+    const toysCategory = await tx.menuCategory.create({
+      data: {
+        name: "Brinquedos",
+
+        babyId: babyShower.id,
+      },
+    });
+    await tx.product.createMany({
+      data: [
+        {
+          name: "Brinquedo Educativo, Caranguejo Fujao, Anda Com Sensor De Obstaculos",
+          description:
+            "O Brinquedo Caranguejo Fujão De Sensor Dança Com Som Eletrônico é um brinquedo elétrico de rastreamento com indução infravermelha. Quando encontra obstáculos durante o movimento, muda de direção. Este brinquedo interativo produz música dinâmica à medida que se move, o que pode ajudar no desenvolvimento auditivo da criança e ensinar ritmo. O Brinquedo tem 2 cores verde ou laranja, será enviado o que estiver disponível no momento. BENEFÍCIOS: Desperta atenção visual e auditiva, incentiva engatinhar e andar, desperta a curiosidade e atividades cerebrais, desenvolve a mobilidade e coordenação motora, ideal para todas as fases da infância, sensor de obstáculos. Especificação: Tipo de item: Brinquedo de caranguejo de com sensor Material: Plástico e componentes elétricos Quantidade: 1 peça Bateria: 3 pilhas AA (Não inclusas) alimentação: Pilhas Tamanho do produto: C22cm , A14cm L10,5cm Peso da embalagem: 300g",
+          price: 77.97,
+          imageUrl:
+            "https://m.media-amazon.com/images/I/51aUOshjLnL._AC_SL1000_.jpg",
+          menuCategoryId: toysCategory.id,
+          babyId: babyShower.id,
+        },
+        {
+          name: "DM Toys Brinquedo Interativo Musical Mexe Danca Luz e Som Dancing Cachorro",
+          description:
+            "Robô Dancing da DM Toys é um divertido brinquedo musical, ele anda, mexe, remexe e acende luzes para a diversão da criançada.",
+          price: 68.79,
+          imageUrl:
+            "https://m.media-amazon.com/images/I/51OqIvttMUL._AC_SL1000_.jpg",
+          menuCategoryId: toysCategory.id,
+          babyId: babyShower.id,
+        },
       ],
     });
   });

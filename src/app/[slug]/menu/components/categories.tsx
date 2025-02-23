@@ -54,7 +54,7 @@ const BabyShowerCategories = ({ babyShower }: BabyShowerCategoriesProps) => {
         </div>
         <div className="flex items-center gap-1 text-xs text-green-500 mt-3">
           <ClockIcon size={12} />
-          <p>12/02/25</p>
+          <p>10/05/25</p>
         </div>
       </div>
 
