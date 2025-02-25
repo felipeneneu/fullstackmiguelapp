@@ -9,7 +9,7 @@ import { CardContext } from "../../contexts/cards";
 import { useContext } from "react";
 
 const CardSheet = () => {
-  const { isOpen, toggleCard } = useContext(CardContext);
+  const { isOpen, toggleCard, products } = useContext(CardContext);
   return (
     <Sheet open={isOpen} onOpenChange={toggleCard}>
       <SheetContent>
@@ -20,6 +20,11 @@ const CardSheet = () => {
             account and remove your data from our servers.
           </SheetDescription>
         </SheetHeader>
+        {products.map((product) => (
+          <h1 key={product.id}>
+            {product.name} - {product.quantity}
+          </h1>
+        ))}
       </SheetContent>
     </Sheet>
   );
