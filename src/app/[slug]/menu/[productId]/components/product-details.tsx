@@ -1,5 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { formatCurrency } from "@/helpers/format-currency";
 import { Prisma } from "@prisma/client";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -28,8 +29,8 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
     });
   const handleIncreaseQuantity = () => setQuantity((prev) => prev + 1);
   return (
-    <div className="z-50 relative rounded-t-3xl p-5 mt-[-2.5rem] bg-white flex-auto flex flex-col">
-      <div className="flex-auto">
+    <div className="z-50 relative rounded-t-3xl p-5 mt-[-2.5rem] bg-white flex-auto flex flex-col overflow-hidden">
+      <div className="flex-auto overflow-hidden">
         {/* Header */}
         <div className="flex items-center gap-1.5">
           <Image
@@ -44,7 +45,7 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
         <h2 className="mt-1 text-xl font-semibold">{product.name}</h2>
 
         {/* Preço e Quantidade */}
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between mt-3">
           <h3 className="text-xl font-semibold">
             {formatCurrency(product.price)}
           </h3>
@@ -68,10 +69,14 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
         </div>
 
         {/* Sobre o Item */}
-        <div className="mt-6 space-y-3">
-          <h4 className="font-semibold">Sobre</h4>
-          <p className="text-sm text-muted-foreground">{product.description}</p>
-        </div>
+        <ScrollArea className="h-full">
+          <div className="mt-6 space-y-3">
+            <h4 className="font-semibold">Sobre</h4>
+            <p className="text-sm text-muted-foreground">
+              {product.description}
+            </p>
+          </div>
+        </ScrollArea>
       </div>
 
       {/* Botão Comprar */}
