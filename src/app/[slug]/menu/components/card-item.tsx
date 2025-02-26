@@ -1,5 +1,5 @@
-import React from "react";
-import { CardProduct } from "../contexts/cards";
+import React, { useContext } from "react";
+import { CardContext, CardProduct } from "../contexts/cards";
 import Image from "next/image";
 import { formatCurrency } from "@/helpers/format-currency";
 import { Button } from "@/components/ui/button";
@@ -10,6 +10,7 @@ interface CardItemProps {
 }
 
 const CardItem = ({ item }: CardItemProps) => {
+  const { decreaseCartProductQuantity } = useContext(CardContext);
   return (
     <div className="flex items-center justify-between">
       {/* ESQUERDA */}
@@ -24,7 +25,11 @@ const CardItem = ({ item }: CardItemProps) => {
           </p>
           <p className="text-sm font-semibold">{formatCurrency(item.price)}</p>
           <div className="flex items-center gap-1">
-            <Button className="h-7 w-7 rounded-xl" variant="outline">
+            <Button
+              className="h-7 w-7 rounded-xl"
+              variant="outline"
+              onClick={() => decreaseCartProductQuantity(item.id)}
+            >
               <ChevronLeftIcon size={16} />
             </Button>
             <p className="text-xs w-7 text-center">{item.quantity}</p>

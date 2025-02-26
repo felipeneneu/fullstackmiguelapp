@@ -52,6 +52,7 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
             <p className="text-xs text-muted-foreground">{product.baby.name}</p>
           </div>
           <h2 className="mt-1 text-xl font-semibold">{product.name}</h2>
+          <p>Disponivel: {product.stockQuantity}</p>
 
           {/* Preço e Quantidade */}
           <div className="flex items-center justify-between mt-3">

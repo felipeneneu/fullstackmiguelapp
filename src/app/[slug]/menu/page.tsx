@@ -15,7 +15,13 @@ const BabyShowerMenu = async ({ params }: BabyShowerMenuProps) => {
     include: {
       menuCategories: {
         include: {
-          products: true,
+          products: {
+            where: {
+              stockQuantity: {
+                gt: 0,
+              },
+            },
+          },
         },
       },
     },

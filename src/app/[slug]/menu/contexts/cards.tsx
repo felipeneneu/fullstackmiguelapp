@@ -12,6 +12,7 @@ export interface ICardContext {
   products: CardProduct[];
   toggleCard: () => void;
   addProduct: (product: CardProduct) => void;
+  decreaseCartProductQuantity: (productId: string) => void;
 }
 
 export const CardContext = createContext<ICardContext>({
@@ -19,6 +20,7 @@ export const CardContext = createContext<ICardContext>({
   products: [],
   toggleCard: () => {},
   addProduct: () => {},
+  decreaseCartProductQuantity: () => {},
 });
 
 export const CardProvider = ({ children }: { children: ReactNode }) => {
@@ -27,7 +29,6 @@ export const CardProvider = ({ children }: { children: ReactNode }) => {
   const toggleCard = () => setIsOpen((prev) => !prev);
 
   const addProduct = (product: CardProduct) => {
-   
     const productIsAlreadyInCart = products.some(
       (prevProduct) => prevProduct.id === product.id
     );
@@ -45,7 +46,21 @@ export const CardProvider = ({ children }: { children: ReactNode }) => {
         return prevProduct;
       });
     });
-    
+  };
+
+  const decreaseCartProductQuantity = (productId: string) => {
+    setProducts((prevProducts) => {
+      return prevProducts.map((prevProduct) => {
+        if (prevProduct.id !== productId) {
+          return prevProduct;
+        }
+
+        if (prevProduct.quantity === 1) {
+          return prevProduct;
+        }
+        return { ...prevProduct, quantity: prevProduct.quantity - 1 };
+      });
+    });
   };
   return (
     <CardContext.Provider
@@ -54,6 +69,7 @@ export const CardProvider = ({ children }: { children: ReactNode }) => {
         products,
         toggleCard,
         addProduct,
+        decreaseCartProductQuantity,
       }}
     >
       {children}
