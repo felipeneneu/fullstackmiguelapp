@@ -24,8 +24,10 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { createGift } from "../../actions/create-action";
-import { useContext } from "react";
+import { useContext, useTransition } from "react";
 import { CardContext } from "../../contexts/cards";
+import { toast } from "sonner";
+import { Loader2Icon } from "lucide-react";
 
 const formSchema = z.object({
   name: z.string().trim().min(1, {
@@ -48,6 +50,7 @@ const GiftConfirmationDialog = ({
   onOpenChange,
 }: GiftConfirmationDialogProps) => {
   const { products } = useContext(CardContext);
+  const [isPending, startTransition] = useTransition();
 
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
@@ -59,10 +62,14 @@ const GiftConfirmationDialog = ({
   });
   const onSubmit = async (data: FormSchema) => {
     try {
-      await createGift({
-        email: data.email,
-        name: data.name,
-        products,
+      startTransition(async () => {
+        await createGift({
+          email: data.email,
+          name: data.name,
+          products,
+        });
+        onOpenChange(false);
+        toast.success("Mimo confirmado com sucesso!");
       });
     } catch (error) {
       console.error(error);
@@ -116,7 +123,9 @@ const GiftConfirmationDialog = ({
                     type="submit"
                     variant="destructive"
                     className="rounded-full w-full"
+                    disabled={isPending}
                   >
+                    {isPending && <Loader2Icon className="animate-spin" />}
                     Finalizar
                   </Button>
                   <DrawerClose asChild>
