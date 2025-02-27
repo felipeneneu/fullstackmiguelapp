@@ -5,14 +5,18 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { CardContext } from "../../contexts/cards";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import CardItem from "../../components/card-item";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { formatCurrency } from "@/helpers/format-currency";
+import { Button } from "@/components/ui/button";
+import GiftConfirmationDialog from "./gift-confirmation";
 
 const CardSheet = () => {
+  const [giftConfirmationDialogIsOpen, setGiftConfirmationDialogIsOpen] =
+    useState(false);
   const { isOpen, toggleCard, products, total } = useContext(CardContext);
+
   return (
     <Sheet open={isOpen} onOpenChange={toggleCard}>
       <SheetContent className="w-[80%]">
@@ -35,7 +39,16 @@ const CardSheet = () => {
               </div>
             </CardContent>
           </Card>
-          <Button className="w-full rounded-full">Comprar mimo</Button>
+          <Button
+            className="w-full rounded-full"
+            onClick={() => setGiftConfirmationDialogIsOpen(true)}
+          >
+            Comprar mimo
+          </Button>
+          <GiftConfirmationDialog
+            open={giftConfirmationDialogIsOpen}
+            onOpenChange={setGiftConfirmationDialogIsOpen}
+          />
         </div>
       </SheetContent>
     </Sheet>
