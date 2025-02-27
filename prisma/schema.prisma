@@ -68,6 +68,7 @@ model GiftConfirmationProduct {
   giftConfirmationId Int
   product            Product          @relation(fields: [productId], references: [id], onDelete: Cascade)
   productId          String
+  productName        String
   quantity           Int
   price              Float
   createdAt          DateTime         @default(now())

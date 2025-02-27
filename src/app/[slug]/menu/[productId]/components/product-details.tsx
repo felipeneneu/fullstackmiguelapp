@@ -9,6 +9,7 @@ import Image from "next/image";
 import React, { useContext, useState } from "react";
 import { CardContext } from "../../contexts/cards";
 import CardSheet from "./sheets";
+import { Badge } from "@/components/ui/badge";
 
 interface ProductDetailsProps {
   product: Prisma.ProductGetPayload<{
@@ -30,7 +31,8 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
       if (prev === 1) return prev;
       return prev - 1;
     });
-  const handleIncreaseQuantity = () => setQuantity((prev) => prev + 1);
+  const handleIncreaseQuantity = () =>
+    setQuantity((prev) => (prev < product.stockQuantity ? prev + 1 : prev));
   const handleAddToCart = () => {
     addProduct({ ...product, quantity });
     toggleCard();
@@ -52,7 +54,8 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
             <p className="text-xs text-muted-foreground">{product.baby.name}</p>
           </div>
           <h2 className="mt-1 text-xl font-semibold">{product.name}</h2>
-          <p>Disponivel: {product.stockQuantity}</p>
+          <Badge>Disponivel: {product.stockQuantity}</Badge>
+          <p></p>
 
           {/* Preço e Quantidade */}
           <div className="flex items-center justify-between mt-3">

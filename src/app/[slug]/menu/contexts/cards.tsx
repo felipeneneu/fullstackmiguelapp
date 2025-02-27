@@ -3,7 +3,10 @@ import { Product } from "@prisma/client";
 import { createContext, ReactNode, useState } from "react";
 
 export interface CardProduct
-  extends Pick<Product, "id" | "name" | "price" | "imageUrl"> {
+  extends Pick<
+    Product,
+    "id" | "name" | "price" | "imageUrl" | "stockQuantity"
+  > {
   quantity: number;
 }
 
@@ -75,6 +78,9 @@ export const CardProvider = ({ children }: { children: ReactNode }) => {
     setProducts((prevProducts) => {
       return prevProducts.map((prevProduct) => {
         if (prevProduct.id !== productId) {
+          return prevProduct;
+        }
+        if (prevProduct.quantity >= prevProduct.stockQuantity) {
           return prevProduct;
         }
         return { ...prevProduct, quantity: prevProduct.quantity + 1 };
