@@ -10,23 +10,32 @@ export interface CardProduct
 export interface ICardContext {
   isOpen: boolean;
   products: CardProduct[];
+  total: number;
   toggleCard: () => void;
   addProduct: (product: CardProduct) => void;
   decreaseCartProductQuantity: (productId: string) => void;
+  increaseCartProductQuantity: (productId: string) => void;
+  removeProduct: (productId: string) => void;
 }
 
 export const CardContext = createContext<ICardContext>({
   isOpen: false,
   products: [],
+  total: 0,
   toggleCard: () => {},
   addProduct: () => {},
   decreaseCartProductQuantity: () => {},
+  increaseCartProductQuantity: () => {},
+  removeProduct: () => {},
 });
 
 export const CardProvider = ({ children }: { children: ReactNode }) => {
   const [products, setProducts] = useState<CardProduct[]>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const toggleCard = () => setIsOpen((prev) => !prev);
+  const total = products.reduce((acc, product) => {
+    return acc + product.price * product.quantity;
+  }, 0);
 
   const addProduct = (product: CardProduct) => {
     const productIsAlreadyInCart = products.some(
@@ -62,14 +71,32 @@ export const CardProvider = ({ children }: { children: ReactNode }) => {
       });
     });
   };
+  const increaseCartProductQuantity = (productId: string) => {
+    setProducts((prevProducts) => {
+      return prevProducts.map((prevProduct) => {
+        if (prevProduct.id !== productId) {
+          return prevProduct;
+        }
+        return { ...prevProduct, quantity: prevProduct.quantity + 1 };
+      });
+    });
+  };
+  const removeProduct = (productId: string) => {
+    setProducts((prevProducts) =>
+      prevProducts.filter((prevProducts) => prevProducts.id !== productId)
+    );
+  };
   return (
     <CardContext.Provider
       value={{
         isOpen,
         products,
+        total,
         toggleCard,
         addProduct,
         decreaseCartProductQuantity,
+        increaseCartProductQuantity,
+        removeProduct,
       }}
     >
       {children}
