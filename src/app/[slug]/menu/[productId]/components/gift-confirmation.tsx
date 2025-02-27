@@ -1,4 +1,5 @@
 "use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Drawer,
@@ -22,6 +23,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { createGift } from "../../actions/create-action";
+import { useContext } from "react";
+import { CardContext } from "../../contexts/cards";
 
 const formSchema = z.object({
   name: z.string().trim().min(1, {
@@ -43,6 +47,8 @@ const GiftConfirmationDialog = ({
   open,
   onOpenChange,
 }: GiftConfirmationDialogProps) => {
+  const { products } = useContext(CardContext);
+
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -51,8 +57,16 @@ const GiftConfirmationDialog = ({
     },
     shouldUnregister: true,
   });
-  const onSubmit = (data: FormSchema) => {
-    console.log(data);
+  const onSubmit = async (data: FormSchema) => {
+    try {
+      await createGift({
+        email: data.email,
+        name: data.name,
+        products,
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
   return (
     <Drawer open={open} onOpenChange={onOpenChange}>

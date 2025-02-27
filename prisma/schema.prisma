@@ -37,28 +37,38 @@ model MenuCategory {
 }
 
 model Product {
-  id                String             @id @default(uuid())
-  name              String
-  description       String
-  price             Float
-  imageUrl          String
-  baby              BabyShower         @relation(fields: [babyId], references: [id], onDelete: Cascade)
-  babyId            String
-  menuCategory      MenuCategory       @relation(fields: [menuCategoryId], references: [id], onDelete: Cascade)
-  giftConfirmations GiftConfirmation[]
-  menuCategoryId    String
-  createdAt         DateTime           @default(now())
-  updatedAt         DateTime           @updatedAt
-  productStock      Boolean            @default(true)
-  stockQuantity     Int                @default(0) // Quantidade disponível em estoque
+  id                       String                    @id @default(uuid())
+  name                     String
+  description              String
+  price                    Float
+  imageUrl                 String
+  baby                     BabyShower                @relation(fields: [babyId], references: [id], onDelete: Cascade)
+  babyId                   String
+  menuCategory             MenuCategory              @relation(fields: [menuCategoryId], references: [id], onDelete: Cascade)
+  giftProducts             GiftConfirmationProduct[] // Relacionamento correto
+  menuCategoryId           String
+  createdAt                DateTime                  @default(now())
+  updatedAt                DateTime                  @updatedAt
+  productStock             Boolean                   @default(true)
+  stockQuantity            Int                       @default(0) // Quantidade disponível em estoque
 }
 
 model GiftConfirmation {
-  id        String   @id @default(uuid()) // Identificador único
-  name      String // Nome do convidado que confirmou o presente
-  email     String // E-mail do convidado que confirmou o presente
-  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade) // Relacionamento com um produto específico
-  productId String
-  quantity  Int // Quantidade do produto confirmada
-  createdAt DateTime @default(now()) // Registra a data da confirmação
+  id        Int                    @id @default(autoincrement())
+  name      String
+  email     String
+  // total             Float
+  giftProducts  GiftConfirmationProduct[] // 🆕 Agora pode ter vários produtos
+  createdAt DateTime                  @default(now())
+}
+
+model GiftConfirmationProduct {
+  id                 String           @id @default(uuid())
+  giftConfirmation   GiftConfirmation @relation(fields: [giftConfirmationId], references: [id], onDelete: Cascade)
+  giftConfirmationId Int
+  product            Product          @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId          String
+  quantity           Int
+  price              Float
+  createdAt          DateTime         @default(now())
 }
