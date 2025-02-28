@@ -8,6 +8,7 @@ import Image from "next/image";
 import Products from "./products";
 import { CardContext } from "../contexts/cards";
 import { formatCurrency } from "@/helpers/format-currency";
+import CardSheet from "../[productId]/components/sheets";
 
 interface BabyShowerCategoriesProps {
   babyShower: Prisma.BabyShowerGetPayload<{
@@ -33,7 +34,7 @@ const BabyShowerCategories = ({ babyShower }: BabyShowerCategoriesProps) => {
   const handleCategoryClick = (category: MenuCategoryWithProducts) => {
     setSelectedCategory(category);
   };
-  const { products, total } = useContext(CardContext);
+  const { products, total, toggleCard } = useContext(CardContext);
   const getCategoryButtonVariant = (category: MenuCategoryWithProducts) => {
     return selectedCategory.id === category.id ? "default" : "secondary";
   };
@@ -64,17 +65,19 @@ const BabyShowerCategories = ({ babyShower }: BabyShowerCategoriesProps) => {
       {/* Categorias  */}
       <ScrollArea className="w-full ">
         <div className="flex w-max space-x-4 p-4 pt-5">
-          {babyShower.menuCategories.map((category) => (
-            <Button
-              onClick={() => handleCategoryClick(category)}
-              key={category.id}
-              variant={getCategoryButtonVariant(category)}
-              size="sm"
-              className="rounded-full"
-            >
-              {category.name}
-            </Button>
-          ))}
+          {babyShower.menuCategories
+            .filter((category) => category.products.length > 0)
+            .map((category) => (
+              <Button
+                onClick={() => handleCategoryClick(category)}
+                key={category.id}
+                variant={getCategoryButtonVariant(category)}
+                size="sm"
+                className="rounded-full"
+              >
+                {category.name}
+              </Button>
+            ))}
         </div>
         <ScrollBar orientation="horizontal" />
       </ScrollArea>
@@ -93,7 +96,8 @@ const BabyShowerCategories = ({ babyShower }: BabyShowerCategoriesProps) => {
               </span>
             </p>
           </div>
-          <Button>Ver Lista</Button>
+          <Button onClick={toggleCard}>Ver Lista</Button>
+          <CardSheet />
         </div>
       )}
     </div>

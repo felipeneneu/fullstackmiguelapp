@@ -28,6 +28,7 @@ import { useContext, useTransition } from "react";
 import { CardContext } from "../../contexts/cards";
 import { toast } from "sonner";
 import { Loader2Icon } from "lucide-react";
+import { useParams, useRouter } from "next/navigation";
 
 const formSchema = z.object({
   name: z.string().trim().min(1, {
@@ -51,6 +52,8 @@ const GiftConfirmationDialog = ({
 }: GiftConfirmationDialogProps) => {
   const { products } = useContext(CardContext);
   const [isPending, startTransition] = useTransition();
+  const { slug } = useParams<{ slug: string }>();
+  const router = useRouter(); // Adicione essa linha
 
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
@@ -70,6 +73,7 @@ const GiftConfirmationDialog = ({
         });
         onOpenChange(false);
         toast.success("Mimo confirmado com sucesso!");
+        router.push(`/${slug}/menu/thanks`);
       });
     } catch (error) {
       console.error(error);
