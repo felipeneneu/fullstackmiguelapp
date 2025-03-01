@@ -9,13 +9,13 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { CheckCircle2Icon } from "lucide-react";
-import { revalidatePath } from "next/cache";
+
 
 const ThanksYou = () => {
   const goToHome = () => {
     window.location.href = "/miguel";
   };
-  // revalidatePath()
+
   return (
     <AlertDialog open={true}>
       <AlertDialogContent className="px-5 py-5 rounded-2xl w-[85%]">
