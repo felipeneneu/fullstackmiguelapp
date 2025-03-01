@@ -4,15 +4,23 @@ import { db } from "@/lib/prima";
 interface CreateGiftConfirmationInput {
   name: string;
   email: string;
-
   products: Array<{
     id: string;
     quantity: number;
     name: string;
   }>;
+  slug: string;
 }
 
 export const createGift = async (input: CreateGiftConfirmationInput) => {
+  const baby = await db.babyShower.findFirst({
+    where: {
+      slug: input.slug,
+    },
+  });
+  if (!baby) {
+    throw new Error("Baby not found");
+  }
   const productsWithPrices = await db.product.findMany({
     where: {
       id: {
@@ -24,6 +32,7 @@ export const createGift = async (input: CreateGiftConfirmationInput) => {
     data: {
       name: input.name,
       email: input.email,
+
       giftProducts: {
         createMany: {
           data: input.products.map((product) => ({
@@ -34,6 +43,8 @@ export const createGift = async (input: CreateGiftConfirmationInput) => {
           })),
         },
       },
+      babyId: baby.id,
+      // Aqui está a correção
     },
   });
   await Promise.all(

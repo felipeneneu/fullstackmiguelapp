@@ -45,7 +45,7 @@ const BabyShower = async ({ params }: BabyShowerProps) => {
           <Link href={`${slug}/menu`}>Lista de Presentes</Link>
         </Button>
         <Button className="rounded-full" asChild>
-          Confirmar Presença
+          <Link href={`${slug}/mimos`}>Ver seus mimos</Link>
         </Button>
       </div>
     </div>

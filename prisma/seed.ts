@@ -169,6 +169,154 @@ const main = async () => {
         },
       ],
     });
+    // Nova Categoria: Roupas
+    const clothesCategory = await tx.menuCategory.create({
+      data: {
+        name: "Roupas",
+        babyId: babyShower.id,
+      },
+    });
+
+    await tx.product.createMany({
+      data: [
+        {
+          name: "Body Bebê Masculino",
+          description: "Body de bebê 100% algodão, com estampas divertidas.",
+          price: 29.9,
+          productStock: true,
+          stockQuantity: 15,
+          imageUrl:
+            "https://m.media-amazon.com/images/I/51PA7e5XxEL._AC_SX522_.jpg",
+          menuCategoryId: clothesCategory.id,
+          babyId: babyShower.id,
+        },
+        {
+          name: "Macacão Infantil",
+          description:
+            "Macacão de bebê, com fechamento em botões, para fácil troca.",
+          price: 49.9,
+          productStock: true,
+          stockQuantity: 8,
+          imageUrl:
+            "https://m.media-amazon.com/images/I/71riCkXALpL._AC_SX522_.jpg",
+          menuCategoryId: clothesCategory.id,
+          babyId: babyShower.id,
+        },
+      ],
+    });
+
+    // Nova Categoria: Alimentação
+    const foodCategory = await tx.menuCategory.create({
+      data: {
+        name: "Alimentação",
+        babyId: babyShower.id,
+      },
+    });
+
+    await tx.product.createMany({
+      data: [
+        {
+          name: "Mamadeira Anti-cólica",
+          description:
+            "Mamadeira com design anti-cólica, ideal para o bebê em seus primeiros meses.",
+          price: 39.9,
+          productStock: true,
+          stockQuantity: 10,
+          imageUrl:
+            "https://m.media-amazon.com/images/I/51+lIzLoNQL._AC_SL1000_.jpg",
+          menuCategoryId: foodCategory.id,
+          babyId: babyShower.id,
+        },
+        {
+          name: "Papapá, Papinha infantil, Orgânico, Sabor Maçã & Ameixa, 100g, Rosa",
+          description:
+            "A Papinha Infantil Orgânica La Chef, Sabor Maçã & Ameixa, da Papapá, é a escolha ideal para proporcionar uma alimentação saudável e nutritiva ao seu bebê. Feita com ingredientes orgânicos de alta qualidade, essa papinha combina o sabor delicioso de maçã e ameixa, garantindo uma refeição rica em fibras, vitaminas e minerais essenciais para o crescimento saudável do bebê. A embalagem prática e fácil de abrir facilita o preparo e o armazenamento, sendo ideal para o dia a dia corrido dos pais. Além disso, é um produto natural, livre de conservantes, corantes e aditivos artificiais, garantindo a segurança alimentar do seu pequeno. Escolha a Papinha Infantil Orgânica La Chef para uma alimentação saudável e prática.",
+          price: 12.5,
+          productStock: true,
+          stockQuantity: 20,
+          imageUrl:
+            "https://m.media-amazon.com/images/I/71V19K9CR4L._AC_SL1500_.jpg",
+          menuCategoryId: foodCategory.id,
+          babyId: babyShower.id,
+        },
+      ],
+    });
+
+    // Nova Categoria: Acessórios
+    const accessoriesCategory = await tx.menuCategory.create({
+      data: {
+        name: "Acessórios",
+        babyId: babyShower.id,
+      },
+    });
+
+    await tx.product.createMany({
+      data: [
+        {
+          name: "Chupeta Ortodôntica",
+          description:
+            "A Chupeta para Recém Nascido Anatômica NUK Sensitive foi desenvolvida em 100% silicone soft flex extra macio, com design moderno em peça única, alça integrada para evitar perdas e cores agradáveis. Seu formato contorna o rosto do bebê de maneira suave sem cobrir o nariz do pequeno facilitando a respiração. O bico em silicone possui formato assimétrico NUK Oral Fit com topo curvado para se adaptar melhor ao palato da criança e a base angular para o correto posicionamento da lingua. Se encaixa perfeitamente na boca proporcionando maior conforto em cada fase do crescimento do bebê. Possui um estojo protetor que pode ser utilizado no micro-ondas para higienização da chupeta e também para o transporte. A chupeta NUK Sensitive está disponível em 2 diferentes tamanhos, sendo indicados para crianças de 0 a 6 meses e 6 a 18 meses. A chupeta é livre de BPA. O modelo apresentado é recomendado para bebês de 0 a 6 meses.",
+          price: 24.49,
+          productStock: true,
+          stockQuantity: 1,
+          imageUrl:
+            "https://m.media-amazon.com/images/I/811o6+6sHoL._AC_SL1500_.jpg",
+          menuCategoryId: accessoriesCategory.id,
+          babyId: babyShower.id,
+        },
+        {
+          name: "Cadeirinha de Alimentação",
+          description:
+            "Cadeira de refeição portátil com 3 posições de altura, bandeja removível e sistema de fixação para cadeiras de adulto. A Cadeira de Alimentação Portátil Pop Cosco tem a praticidade de poder ser instalada sobre as cadeiras de adulto, em sua maioria, proporcionando uma refeição mais segura e prática para a criança em família. Confortável, com acolchoado removível e lavável, para manter tudo sempre limpo, fechamento fácil e ultracompacto, com alça para carregar. Ajustável em 3 posições de altura conforme o crescimento da criança, a bandeja pode ser removida e a segurança do cinto de 3 pontos e das tiras para prender nas cadeiras de adulto, com total segurança, seja para melhor aproveitamento do espaço em casa ou a praticidade de ter sempre o espaço adequado para as refeições da criança, aonde for, em todos os momentos.",
+          price: 139.9,
+          productStock: true,
+          stockQuantity: 5,
+          imageUrl:
+            "https://m.media-amazon.com/images/I/51FrqC0GI9L._AC_SL1000_.jpg",
+          menuCategoryId: accessoriesCategory.id,
+          babyId: babyShower.id,
+        },
+      ],
+    });
+
+    // Nova Categoria: Mobiliário
+    const furnitureCategory = await tx.menuCategory.create({
+      data: {
+        name: "Mobiliário",
+        babyId: babyShower.id,
+      },
+    });
+
+    await tx.product.createMany({
+      data: [
+        {
+          name: "Berço Portátil",
+          description:
+            "Berço portátil com estrutura resistente, ideal para o bebê dormir com conforto e segurança.",
+          price: 349.9,
+          productStock: true,
+          stockQuantity: 1,
+          imageUrl:
+            "https://m.media-amazon.com/images/I/61ybxaWF52L._AC_SL1000_.jpg",
+          menuCategoryId: furnitureCategory.id,
+          babyId: babyShower.id,
+        },
+        {
+          name: "Cômoda para Bebê",
+          description:
+            "Cômoda com várias gavetas para armazenar as roupas e acessórios do bebê.",
+          price: 249.9,
+          productStock: true,
+          stockQuantity: 1,
+          imageUrl:
+            "https://m.media-amazon.com/images/I/4167Yai1pBL._AC_SL1000_.jpg",
+          menuCategoryId: furnitureCategory.id,
+          babyId: babyShower.id,
+        },
+      ],
+    });
+
+    // ADD NEW CATEGORIES AND PRODUCTS
   });
 };
 

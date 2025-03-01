@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Product } from "@prisma/client";
 import { ChevronLeftIcon, ScrollTextIcon } from "lucide-react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import React from "react";
 
 interface ProductHeaderProps {
@@ -11,8 +11,10 @@ interface ProductHeaderProps {
 }
 
 const ProductHeader = ({ product }: ProductHeaderProps) => {
+  const { slug } = useParams<{ slug: string }>();
   const router = useRouter();
   const handleBackClick = () => router.back();
+  const handleListClick = () => router.push(`/${slug}/mimos`);
   return (
     <div className="relative min-h-[300px] w-full">
       <Button
@@ -36,6 +38,7 @@ const ProductHeader = ({ product }: ProductHeaderProps) => {
         variant="secondary"
         size="icon"
         className="absolute top-4 right-4 rounded-full z-50"
+        onClick={handleListClick}
       >
         <ScrollTextIcon />
       </Button>

@@ -70,6 +70,7 @@ const GiftConfirmationDialog = ({
           email: data.email,
           name: data.name,
           products,
+          slug,
         });
         onOpenChange(false);
         toast.success("Mimo confirmado com sucesso!");
