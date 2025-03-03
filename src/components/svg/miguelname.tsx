@@ -5,6 +5,7 @@ const MiguelName = (props: SVGProps<SVGSVGElement>) => (
     xmlns="http://www.w3.org/2000/svg"
     width={142}
     height={39}
+    viewBox="0 0 142 39"
     fill="none"
     {...props}
   >

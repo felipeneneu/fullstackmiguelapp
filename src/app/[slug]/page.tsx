@@ -33,7 +33,7 @@ const BabyShower = async ({ params }: BabyShowerProps) => {
         </p>
       </div>
       <div className="pt-12 space-y-2 flex flex-col justify-center flex-1 w-full gap-2 pb-12">
-        <Button className="rounded-full" asChild>
+        <Button className="rounded-full" disabled>
           <a
             href="https://maps.app.goo.gl/ThpAmXZkvKZ1jnno7"
             className="text-sm"
